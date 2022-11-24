@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Palisade</string>
     <string name="select_a_topic">Select a Topic</string>
-    <string name="break_walls_not_heart">break their walls not their hearts</string>
+    <string name="walls">Break their walls</string>
+    <string name="not">not</string>
+    <string name="heart">their hearts ♡</string>
+    <img src = "icon"/>.
+    <string name="icon"></string>
+
 </resources>
