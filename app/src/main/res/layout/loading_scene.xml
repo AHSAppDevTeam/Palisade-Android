@@ -41,7 +41,7 @@
         android:text="@string/not"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent"
