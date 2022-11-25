@@ -2,9 +2,9 @@
     //Loading Screen
     <string name="app_name">Palisade</string>
     <string name="select_a_topic">Select a Topic</string>
-    <string name="walls">Break their walls</string>
-    <string name="not">not</string>
-    <string name="heart">their hearts ♡</string>
+    <string name="walls">Break their 𝙒𝙖𝙡𝙡𝙨</string>
+    <string name="not_heart">𝙉𝙤𝙩 their hearts ♡</string>
     <string name="icon"></string>
+
 
 </resources>
