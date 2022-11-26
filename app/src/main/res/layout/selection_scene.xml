@@ -24,21 +24,9 @@
         app:navigationIcon="@android:drawable/ic_menu"
         app:title="@string/selection_title"
         app:menu="@menu/top_app_bar"
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"
-    <!-- Topics -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
+    <!-- Topics -->
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
