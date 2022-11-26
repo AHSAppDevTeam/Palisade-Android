@@ -3,6 +3,7 @@ package app.ahs.Palisade;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,11 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void show(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("palisade");
-
-    }
 
 
     @Override
@@ -29,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_scene);
 
+    }
+
+    public void openTopic(View view) {
+        Intent i = new Intent(this, selection_scene.class);
+        startActivity(i);
     }
 
 
