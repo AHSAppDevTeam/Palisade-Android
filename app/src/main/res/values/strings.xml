@@ -8,19 +8,21 @@
 
     //Selection Screen
     <string name="selection_title">Select a Topic!</string>
-    <string name ="selection_favorite_title">Favorite</string>
-    <string name ="selection_search_title">Search</string>
-    <string name ="selection_more_title">More</string>
+    <string name="selection_favorite_title">Favorite</string>
+    <string name="selection_search_title">Search</string>
+    <string name="selection_more_title">More</string>
 
     //Button names
-    <string name ="sports_topic">Sports</string>
-    <string name ="nature_topic">Nature</string>
-    <string name ="art_topic">Art</string>
-    <string name ="food_topic">Food</string>
-    <string name ="dating_topic">Dating</string>
-    <string name ="feelings_topic">Feelings</string>
-    <string name ="gaming_topic">Gaming</string>
-    <string name ="work_topic">Work</string>
+    <string name="sports_topic">Sports</string>
+    <string name="nature_topic">Nature</string>
+    <string name="art_topic">Art</string>
+    <string name="food_topic">Food</string>
+    <string name="dating_topic">Dating</string>
+    <string name="feelings_topic">Feelings</string>
+    <string name="gaming_topic">Gaming</string>
+    <string name="work_topic">Work</string>
+    <string name="title_activity_posts_menu">posts_menu</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>
