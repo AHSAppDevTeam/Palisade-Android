@@ -35,110 +35,255 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/nature_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17"
+        android:scaleType="fitCenter"
+        android:src="@drawable/nature1"
+        android:contentDescription="@string/nature_topic"
+        >
+
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sports1"
+        android:contentDescription="@string/sports_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428"
+        android:scaleType="fitCenter"
+        android:src="@drawable/art1"
+        android:contentDescription="@string/art_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428"
+        android:scaleType="fitCenter"
+        android:src="@drawable/food1"
+        android:contentDescription="@string/food_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.686"
+        android:scaleType="fitCenter"
+        android:src="@drawable/dating1"
+        android:contentDescription="@string/dating_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.686"
+        android:scaleType="fitCenter"
+        android:src="@drawable/feelings1"
+        android:contentDescription="@string/feelings_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gaming1"
+        android:contentDescription="@string/gaming_topic">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94"
+        android:scaleType="fitCenter"
+        android:src="@drawable/work1"
+        android:contentDescription="@string/work_topic">
+    </ImageView>
+
+
+    <!--Buttons-->
+    <Button
+        android:id="@+id/nature_button"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/nature_topic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.12"
-        android:text="@string/nature_topic"
-        style="?attr/materialButtonOutlinedStyle" />
+        style="?attr/materialButtonOutlinedStyle"/>
 
 
     <Button
         android:id="@+id/sports_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24"
+        app:layout_constraintVertical_bias="0.12"
         android:text="@string/sports_topic"
         style="?attr/materialButtonOutlinedStyle"/>
 
 
     <Button
         android:id="@+id/art_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36"
+        app:layout_constraintVertical_bias="0.40"
         android:text="@string/art_topic"
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
         android:id="@+id/food_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48"
+        app:layout_constraintVertical_bias="0.40"
         android:text="@string/food_topic"
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
         android:id="@+id/dating_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.60"
+        app:layout_constraintVertical_bias="0.68"
         android:text="@string/dating_topic"
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
         android:id="@+id/feelings_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72"
+        app:layout_constraintVertical_bias="0.68"
         android:text="@string/feelings_topic"
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
         android:id="@+id/gaming_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84"
+        app:layout_constraintVertical_bias="0.96"
         android:text="@string/gaming_topic"
         style="?attr/materialButtonOutlinedStyle" />
 
     <Button
         android:id="@+id/work_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:gravity="top|center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
         android:text="@string/work_topic"
         style="?attr/materialButtonOutlinedStyle" />
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/gamingImageButton"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.84"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:src="@drawable/gaming1"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
