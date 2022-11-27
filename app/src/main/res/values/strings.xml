@@ -25,4 +25,8 @@
     <string name="action_settings">Settings</string>
 
 
+    //Strings
+    <string name="anonymous">Anonymous</string>
+
+
 </resources>

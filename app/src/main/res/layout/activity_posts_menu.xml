@@ -15,11 +15,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/topAppBar"
-            app:title="Palisade"
+            app:title="Topic Name"
             app:navigationIcon="@drawable/ic_baseline_menu_24"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             />
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView" />
 
 
     <com.google.android.material.card.MaterialCardView
@@ -37,20 +42,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="60dp"
                 android:padding="16dp">
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="asdffa"
+                    android:text="@string/anonymous"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="asdfdsafasd"
+                    android:text="Question"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 
@@ -70,12 +76,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="Reply" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="adfsdafsad" />
             </LinearLayout>
 
         </LinearLayout>
@@ -83,6 +83,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <include layout="@layout/content_scrolling" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

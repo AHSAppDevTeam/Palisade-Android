@@ -7,8 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+
 
 
 
@@ -20,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
+        mAuth = FirebaseAuth.getInstance();
+        UUID.randomUUID().toString();
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             Intent intent = new Intent(this, selection_scene.class);

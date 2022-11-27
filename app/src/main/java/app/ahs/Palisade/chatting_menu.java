@@ -10,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class chatting_menu extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +17,15 @@ public class chatting_menu extends AppCompatActivity {
         setContentView(R.layout.chatting_menu);
 
     }
+    private DatabaseReference mDatabase;
 
     public void ReadAndWriteSnippets(DatabaseReference database) {
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
     }
+
+
 
 
 

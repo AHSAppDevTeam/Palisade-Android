@@ -7,14 +7,15 @@ import android.widget.Button;
 
 public class reply extends AppCompatActivity {
 
-    Button reply = findViewById(R.id.btn_reply)
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Button reply = findViewById(R.id.btn_reply);
+
     }
 
-    View.OnClickListener
 
 
 }
