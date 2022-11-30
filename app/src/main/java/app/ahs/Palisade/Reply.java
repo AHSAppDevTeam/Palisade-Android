@@ -2,10 +2,9 @@ package app.ahs.Palisade;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-public class reply extends AppCompatActivity {
+public class Reply extends AppCompatActivity {
 
 
 

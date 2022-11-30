@@ -1,25 +1,32 @@
 package app.ahs.Palisade;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.Objects;
 
-public class selection_scene extends AppCompatActivity implements View.OnClickListener {
+public class SelectionScene extends AppCompatActivity implements View.OnClickListener {
 
-    MaterialToolbar textchange;
+    ActionBar textchange;
+    Button natureButton;
+    Intent intentPosts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selection_scene);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        textchange = findViewById(R.id.topAppBar);
+        natureButton = findViewById(R.id.nature_button);
+        intentPosts = new Intent(this, PostsMenu.class);
+        textchange = getSupportActionBar();
     }
 
 
@@ -51,7 +58,8 @@ public class selection_scene extends AppCompatActivity implements View.OnClickLi
                 textchange.setTitle((String) "Work");
                 break;
         }
-        Intent i = new Intent(this, posts_menu.class);
-        startActivity(i);
+        intentPosts.putExtra(PostsMenu.topicNameID, textchange.getTitle());
+        startActivity(intentPosts);
+
     }
 }

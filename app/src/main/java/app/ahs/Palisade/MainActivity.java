@@ -14,11 +14,6 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +22,10 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        mAuth = FirebaseAuth.getInstance();
         UUID.randomUUID().toString();
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent intent = new Intent(this, selection_scene.class);
+            Intent intent = new Intent(this, SelectionScene.class);
             startActivity(intent);
             finish();
         }, 3000);

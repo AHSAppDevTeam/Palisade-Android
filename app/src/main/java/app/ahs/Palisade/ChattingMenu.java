@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class chatting_menu extends AppCompatActivity {
+public class ChattingMenu extends AppCompatActivity {
 
 
     @Override

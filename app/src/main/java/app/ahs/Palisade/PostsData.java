@@ -1,9 +1,9 @@
 package app.ahs.Palisade;
 
-public class postsData {
+public class PostsData {
     private String message;
 
-    public postsData(String message) {
+    public PostsData(String message) {
         this.message = message;
     }
 

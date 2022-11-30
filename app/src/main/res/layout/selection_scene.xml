@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
+        android:id="@+id/topAppBar2"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_baseline_menu_24"
@@ -152,6 +152,7 @@
 
     <!--Buttons-->
     <Button
+        android:onClick="onClick"
         android:id="@+id/nature_button"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="150dp"
@@ -168,6 +169,7 @@
 
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/sports_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -184,6 +186,7 @@
 
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/art_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -199,6 +202,7 @@
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/food_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -214,6 +218,7 @@
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/dating_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -229,6 +234,7 @@
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/feelings_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -244,6 +250,7 @@
         style="?attr/materialButtonOutlinedStyle"/>
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/gaming_button"
         android:textSize="18sp"
         android:gravity="top|center"
@@ -259,6 +266,7 @@
         style="?attr/materialButtonOutlinedStyle" />
 
     <Button
+        android:onClick="onClick"
         android:id="@+id/work_button"
         android:textSize="18sp"
         android:gravity="top|center"

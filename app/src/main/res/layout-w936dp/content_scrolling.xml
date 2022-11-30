@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".posts_menu"
+    tools:context=".PostsMenu"
     tools:showIn="@layout/activity_posts_menu">
 
     <androidx.core.widget.NestedScrollView

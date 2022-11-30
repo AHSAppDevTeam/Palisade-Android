@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class postsAdapter extends RecyclerView.Adapter<postsAdapter.ViewHolder>{
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
