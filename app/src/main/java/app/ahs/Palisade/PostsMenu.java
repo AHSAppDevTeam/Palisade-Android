@@ -37,7 +37,7 @@ public class PostsMenu extends AppCompatActivity {
         };
 
        PostsAdapter postsAdapter = new PostsAdapter(postsData, PostsMenu.this);
-       recyclerView.setAdapter(postsAdapter);
+//       recyclerView.setAdapter(postsAdapter);
 
     }
 
