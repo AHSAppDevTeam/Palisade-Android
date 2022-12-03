@@ -21,12 +21,6 @@
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView" />
-
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
@@ -47,12 +41,14 @@
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
+                    android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/anonymous"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <TextView
+                    android:id="@+id/question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -82,7 +78,10 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <include layout="@layout/content_scrolling" />
+    <include
+        layout="@layout/content_scrolling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 
