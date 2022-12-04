@@ -16,18 +16,22 @@
         <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:id="@+id/topAppBar"
+                android:id="@+id/topAppBarChat"
                 app:title="Palisade"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!-- Scrollable content -->
 
+    </androidx.core.widget.NestedScrollView>
 
-
-    <!-- Topic name -->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

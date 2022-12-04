@@ -27,6 +27,9 @@
 
     //Strings
     <string name="anonymous">Anonymous</string>
+    <string name="reply">Reply</string>
+    <string name="delete">Delete</string>
+    <string name="question">Question</string>
 
 
 </resources>

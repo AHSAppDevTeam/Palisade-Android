@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -26,12 +23,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        long messageID = new Date().getTime();
-        Log.d("amongus",String.valueOf(messageID));
+        UUID uuid = UUID.randomUUID();
+        Log.d("amongus", String.valueOf(uuid));
+
+
+//        long messageID = new Date().getTime();
+//        Log.d("amongus",String.valueOf(messageID));
+
+
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             Intent intent = new Intent(this, SelectionScene.class);
+            intent.putExtra(SelectionScene.TOPIC_NAME_ID, uuid);
             startActivity(intent);
             finish();
         }, 3000);

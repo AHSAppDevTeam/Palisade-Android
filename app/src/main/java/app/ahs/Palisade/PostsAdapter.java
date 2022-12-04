@@ -10,21 +10,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
+
+
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
+
+    Arraylist<MessageContents> list;
 
     PostsData[] postsData;
     Context context;
 
-    public PostsAdapter(PostsData[] postsData, PostsMenu activity){
-        this.postsData = postsData;
-        this.context = activity;
-    }
 
     @NonNull
     @Override
@@ -33,6 +29,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         View view = layoutInflater.inflate(R.layout.activity_posts_menu, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
+    }
+
+    public PostsAdapter(Context context, ArrayList<MessageContents> list) {
+        this.postsData = list;
+        this.context = context;
     }
 
     @Override
@@ -64,5 +65,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             user = itemView.findViewById(R.id.username);
         }
     }
+
+
 
 }

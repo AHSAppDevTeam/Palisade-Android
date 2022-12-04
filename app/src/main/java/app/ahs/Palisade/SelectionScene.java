@@ -8,15 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.appbar.MaterialToolbar;
-
 import java.util.Objects;
+import java.util.UUID;
 
 public class SelectionScene extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TOPIC_NAME_ID = "topicNameID";
     ActionBar textchange;
     Button natureButton;
     Intent intentPosts;
+    String uuid;
 
 
     @Override
@@ -27,8 +28,11 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
         natureButton = findViewById(R.id.nature_button);
         intentPosts = new Intent(this, PostsMenu.class);
         textchange = getSupportActionBar();
-    }
 
+        Intent intent = getIntent();
+        uuid = intent.getStringExtra(TOPIC_NAME_ID);
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -59,6 +63,7 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
                 break;
         }
         intentPosts.putExtra(PostsMenu.topicNameID, textchange.getTitle());
+        intentPosts.putExtra("UUID_OF_USER", uuid);
         startActivity(intentPosts);
 
     }
