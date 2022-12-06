@@ -1,6 +1,6 @@
 package app.ahs.Palisade;
 
-public class MessageContents {
+public class PostsContents {
 
     private String message;
     private String user;

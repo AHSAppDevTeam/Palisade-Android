@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
-    Arraylist<MessageContents> list;
 
     PostsData[] postsData;
     Context context;
@@ -31,10 +30,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return viewHolder;
     }
 
-    public PostsAdapter(Context context, ArrayList<MessageContents> list) {
-        this.postsData = list;
-        this.context = context;
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

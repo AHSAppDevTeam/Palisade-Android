@@ -13,6 +13,9 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
+    public UUID uuid = UUID.randomUUID();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        UUID uuid = UUID.randomUUID();
         Log.d("amongus", String.valueOf(uuid));
 
 
 //        long messageID = new Date().getTime();
 //        Log.d("amongus",String.valueOf(messageID));
+
+
+
 
 
 
@@ -41,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         }, 3000);
 
     }
+
+    public UUID getUserUUID()
+    {
+        return uuid;
+    }
+
 
 
 
