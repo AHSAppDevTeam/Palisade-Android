@@ -13,6 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/new_message"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:background="@drawable/roundedbutton"
+            app:backgroundTint="#6200EE"
+            app:elevation="10dp"
+            app:icon="@drawable/add_post" />
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -100,6 +111,15 @@
                     android:visibility="visible" />
             </LinearLayout>
 
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <!-- Scrollable content -->
+
+            </androidx.core.widget.NestedScrollView>
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -109,25 +129,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <!-- Scrollable content -->
-
-        </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android_id = "@+id/new_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            app:fabSize="normal"
-            app:backgroundTint="#6200EE"
-            app:elevation="6dp"
-            android:src="@drawable/add_post"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

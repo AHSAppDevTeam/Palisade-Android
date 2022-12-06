@@ -32,9 +32,9 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener{
+public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener{
     private Button reply;
-    private FloatingActionButton new_post;
+    private Button new_post;
     private TextView question;
 
     public static final String topicNameID = "topicNameID";
@@ -49,6 +49,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 //        question.setText(message);
     }
 
+
     MaterialCardView materialCardView;
 
     public void Delete(View view){
@@ -61,7 +62,6 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_menu);
         MaterialToolbar AppBarPosts = findViewById(R.id.topAppBarPosts);
-        MaterialButton ReplyBtn = findViewById(R.id.btn_reply);
         swipeRefreshLayout = findViewById(R.id.swipelayout);
 //        MaterialButton DeleteBtn = findViewById;
 
@@ -70,7 +70,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         materialCardView = (MaterialCardView) findViewById(R.id.card);
         question = (TextView) findViewById(R.id.question);
         reply = (Button) findViewById(R.id.btn_reply);
-        new_post = (FloatingActionButton) findViewById(R.id.new_message);
+        new_post = (Button) findViewById(R.id.new_message);
 
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +79,12 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             }
         });
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        new_post.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRefresh() {
-
+            public void onClick(View v) {
+                newPost();
             }
         });
-
 
 
         Intent intent = getIntent();
@@ -175,6 +174,11 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     public void openMessage() {
         UserMessage userMessage = new UserMessage();
         userMessage.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public void newPost() {
+        UserPost userPost = new UserPost();
+        userPost.show(getSupportFragmentManager(), "example dialog");
     }
 
 }
