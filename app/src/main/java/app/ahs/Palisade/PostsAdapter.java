@@ -10,22 +10,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
-
-    PostsData[] postsData;
     Context context;
+    ArrayList<PostsContents> list;
+
+    public PostsAdapter(ArrayList<PostsContents> list, Context context) {
+        this.list = list;
+        this.context = context;
+    }
+
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.activity_posts_menu, parent,false);
+        View view = layoutInflater.inflate(R.layout.materical_card_row, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -33,31 +39,31 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final PostsData postsDataList = postsData[position];
-        holder.message.setText(postsDataList.getMessage());
-        holder.user.setText(postsDataList.getUser());
+        PostsContents postsContents = list.get(position);
+        holder.message.setText(postsContents.getMessage());
+//        holder.user.setText(postsContents.getUser());
+//        holder.messageID.setText(postsContents.getMessageID());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, postsDataList.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return postsData.length;
+        return list.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView message;
         TextView user;
+        TextView messageID;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.question);
-            user = itemView.findViewById(R.id.username);
         }
     }
 
