@@ -45,8 +45,8 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     PostsAdapter postsAdapter;
 
     @Override
-    public void applyTexts(String message) {
-//        question.setText(message);
+    public void applyTexts(String post) {
+        question.setText(post);
     }
 
 
