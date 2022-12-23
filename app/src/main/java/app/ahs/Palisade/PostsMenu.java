@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -47,6 +48,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     ArrayList<PostsContents> list;
     PostsAdapter postsAdapter;
 
+
     @Override
     public void applyTexts(String message) {
         question.setText(message);
@@ -66,13 +68,11 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_menu);
         MaterialToolbar AppBarPosts = findViewById(R.id.topAppBarPosts);
-
+        recyclerView = findViewById(R.id.recyclerview);
 
         setSupportActionBar(AppBarPosts);
 
-
         new_post = (FloatingActionButton) findViewById(R.id.new_posts);
-
 
         AppBarPosts.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +81,6 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                 startActivity(i);
             }
         });
-
-
 
         new_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,24 +100,22 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
         AppBarPosts.setTitle(title);
 
+
+
         title = title.toLowerCase(Locale.ROOT);
 
         list = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recyclerview);
         postsAdapter = new PostsAdapter(list, this);
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(postsAdapter);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         //Gets the Firebase Database
         mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title);
-
-
-
-
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -130,28 +126,15 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
                     list.add(postsContents);
-
                 }
                 postsAdapter.notifyDataSetChanged();
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
 
         AppBarPosts.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

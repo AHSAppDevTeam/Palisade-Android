@@ -30,6 +30,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflate layout
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.materical_card_row, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -39,6 +40,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //assigning new variables to the dynamic list
         PostsContents postsContents = list.get(position);
         holder.message.setText(postsContents.getMessage());
 //        holder.user.setText(postsContents.getUser());
