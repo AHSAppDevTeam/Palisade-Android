@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp">
+    android:layout_marginTop="40dp">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -58,18 +58,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:onClick="Reply"
                     android:text="@string/reply" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_delete"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="Delete"
-                    android:text="@string/delete"
-                    android:textColor="#FF0000"
-                    android:visibility="visible" />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btn_delete"-->
+<!--                    style="?attr/borderlessButtonStyle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:onClick="Delete"-->
+<!--                    android:text="@string/delete"-->
+<!--                    android:textColor="#FF0000"-->
+<!--                    android:visibility="visible" />-->
             </LinearLayout>
 
         </LinearLayout>

@@ -85,7 +85,7 @@ public class ChattingMenu extends AppCompatActivity {
         imgSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase.getInstance().getReference("messages/"+chatRoomID).push().setValue(new Message(mainActivity.getUserUUID()));
+//                FirebaseDatabase.getInstance().getReference("messages/"+chatRoomID).push().setValue(new Message(mainActivity.getUserUUID()));
                 edtMessageInput.setText("");
             }
         });

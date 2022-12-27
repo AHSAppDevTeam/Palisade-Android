@@ -3,7 +3,10 @@ package app.ahs.Palisade;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,13 +14,31 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
+
 public class UserPost extends AppCompatDialogFragment {
     private EditText editPost;
     private NewPostsListener listener;
+    private DatabaseReference mDatabase;
+
+    SharedPreferences sp;
+    SharedPreferences amongus;
+    String titles;
+    String UserUUID;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        sp = getActivity().getSharedPreferences("UUID", Context.MODE_PRIVATE);
+        amongus = getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
+        titles = sp.getString("title", "");
+        UserUUID = sp.getString("UUID", "");
+        long messageTime = new Date().getTime();
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.new_post, null);
@@ -36,7 +57,12 @@ public class UserPost extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String post = editPost.getText().toString();
-                        listener.applyTexts(post);
+//                        PostsContents postsContents = new PostsContents(null, post, UserUUID);
+//                        Log.d("amongus", postsContents.toString());
+                        //will send to database and then refresh using the refresh code wtih firebase
+//                        mDatabase.child("palisade").child(title).setValue();\
+//                        mDatabase.child("palisade").child(titles).child(String.valueOf(messageTime)).setValue(postsContents);
+//                        listener.applyTexts(post);
 
                     }
                 });

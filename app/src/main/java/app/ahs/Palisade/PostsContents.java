@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class PostsContents {
 
+    private String replies;
     private String message;
-    private String user;
-    private String messageID;
+    private String UserID;
 
-    public String getMessageID() {
-        return messageID;
+    public String getReplies() {
+        return replies;
     }
 
-    public void setMessageID(String messageID) {
-        this.messageID = messageID;
+    public void setReplies(String replies) {
+        this.replies = replies;
     }
 
     public String getMessage() {
@@ -25,10 +25,10 @@ public class PostsContents {
     }
 
     public String getUser() {
-        return user;
+        return UserID;
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.UserID = user;
     }
 }
