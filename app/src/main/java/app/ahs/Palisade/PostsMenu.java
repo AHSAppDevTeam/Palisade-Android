@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +41,9 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
-public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener{
+public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener, OnItemClickListener {
     private Button reply;
     private FloatingActionButton new_post;
     private TextView question;
@@ -49,9 +53,11 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     DatabaseReference mDatabase;
     RecyclerView recyclerView;
     ArrayList<PostsContents> list;
+    ArrayList<RepliesContents> RepliesList;
     PostsAdapter postsAdapter;
     String UserUUID;
-    SharedPreferences titles;
+    SharedPreferences sp;
+    String titles;
 
     MainActivity mainActivity = new MainActivity();
 
@@ -77,6 +83,9 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         Intent intent = getIntent();
         MaterialToolbar AppBarPosts = findViewById(R.id.topAppBarPosts);
         recyclerView = findViewById(R.id.recyclerview);
+
+        sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
+        titles = sp.getString("title", "");
 //        UserUUID = String.valueOf(mainActivity.getUserUUID());
 //        SharedPreferences sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
 //        UserUUID = sp.getString("UUID", "");
@@ -119,11 +128,14 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         title = title.toLowerCase(Locale.ROOT);
         Log.d("amongus", title);
 
+
         list = new ArrayList<>();
-        postsAdapter = new PostsAdapter(list, this);
+        RepliesList = new ArrayList<>();
+        postsAdapter = new PostsAdapter(list, this, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(postsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //Gets the Firebase Database
         mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title);
@@ -131,11 +143,25 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                PostsContents postsContents = new PostsContents();
+//
+//                postsContents.setMessage(snapshot.child("palisade").child(titles.toString()).;
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
+                    String amongus = dataSnapshot.getKey();
+                    Log.d("amongus", amongus);
+                    DataSnapshot threadSnapshot = dataSnapshot.child(amongus).child("reply");
+                    RepliesContents repliesContents = threadSnapshot.getValue(RepliesContents.class);
+                    RepliesList.add(repliesContents);
                     list.add(postsContents);
+
                 }
+
+
+
+//                list.add(postsContents);
+
                 postsAdapter.notifyDataSetChanged();
 
             }
@@ -154,7 +180,10 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         });
     }
 
+
+
     public void openMessage() {
+        String messageID = mDatabase.push().getKey();
         UserMessage userMessage = new UserMessage();
         userMessage.show(getSupportFragmentManager(), "example dialog");
     }
@@ -172,9 +201,14 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
     }
-    public void Reply(View view) {
-        Log.d("amongus", (UserUUID + " User"));
-        openMessage();
-    }
+//    public void Reply(View view) {
+//        openMessage();
+//    }
 
+    @Override
+    public void onItemClick(int position) {
+        Log.d("amongus", String.valueOf(position));
+        openMessage();
+
+    }
 }

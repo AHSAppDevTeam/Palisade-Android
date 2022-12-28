@@ -12,6 +12,7 @@ public class Material_card_view extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.materical_card_row);
+
     }
 
 

@@ -1,20 +1,21 @@
 package app.ahs.Palisade;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PostsContents {
 
-    private String replies;
+//    private HashMap<String, HashMap<String, String>> replies;
     private String message;
     private String UserID;
 
-    public String getReplies() {
-        return replies;
-    }
-
-    public void setReplies(String replies) {
-        this.replies = replies;
-    }
+//    public HashMap<String, HashMap<String, String>> getReplies() {
+//        return replies;
+//    }
+//
+//    public void setReplies(HashMap<String, HashMap<String, String>> replies) {
+//        this.replies = replies;
+//    }
 
     public String getMessage() {
         return message;

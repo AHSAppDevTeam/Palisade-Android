@@ -33,6 +33,9 @@ public class UserMessage extends AppCompatDialogFragment {
     String titles;
     String UserUUID;
 
+
+
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -69,6 +72,8 @@ public class UserMessage extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String message = editTextMessage.getText().toString();
                         Log.d("amongus", mDatabase.child("palisade").child(titles).get().toString());
+
+
 //                        PostsContents postsContents = new PostsContents(message, null, UserUUID);
                         //add if statement to check if UserUUID is equal to the post id if it is then can't reply
                         //that means that we have to get the message time as well as the data to put a reply to the message.

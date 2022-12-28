@@ -4,42 +4,43 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder>{
 
     Context context;
+    OnItemClickListener listener;
     ArrayList<PostsContents> list;
 
-    public PostsAdapter(ArrayList<PostsContents> list, Context context) {
+    public PostsAdapter(ArrayList<PostsContents> list, Context context, OnItemClickListener listener) {
         this.list = list;
         this.context = context;
+        this.listener = listener;
     }
 
 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate layout
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.materical_card_row, parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+//        ViewHolder viewHolder = new ViewHolder(view, listener);
+        return new MyViewHolder(view, listener);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //assigning new variables to the dynamic list
         PostsContents postsContents = list.get(position);
         holder.message.setText(postsContents.getMessage());
@@ -57,16 +58,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView message;
         TextView user;
         TextView messageID;
+        Button reply;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             message = itemView.findViewById(R.id.question);
+            reply = itemView.findViewById(R.id.btn_reply);
         }
+
     }
 
 
