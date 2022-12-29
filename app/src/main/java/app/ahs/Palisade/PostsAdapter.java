@@ -58,7 +58,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
 
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView message;
         TextView user;
         TextView messageID;
@@ -69,8 +69,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
             super(itemView);
             message = itemView.findViewById(R.id.question);
             reply = itemView.findViewById(R.id.btn_reply);
+            reply.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View view) {
+            listener.onItemClick(this.getLayoutPosition());
+
+        }
     }
 
 

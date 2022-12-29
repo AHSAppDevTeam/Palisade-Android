@@ -51,7 +51,9 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     public static final String topicNameID = "topicNameID";
     private SwipeRefreshLayout swipeRefreshLayout;
     DatabaseReference mDatabase;
+    DatabaseReference RepliesDatabase;
     RecyclerView recyclerView;
+    ArrayList<String> KeyList;
     ArrayList<PostsContents> list;
     ArrayList<RepliesContents> RepliesList;
     PostsAdapter postsAdapter;
@@ -135,6 +137,10 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(postsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        KeyList = new ArrayList<>();
+
+
+
 
 
         //Gets the Firebase Database
@@ -150,12 +156,37 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
                     String amongus = dataSnapshot.getKey();
-                    Log.d("amongus", amongus);
-                    DataSnapshot threadSnapshot = dataSnapshot.child(amongus).child("reply");
-                    RepliesContents repliesContents = threadSnapshot.getValue(RepliesContents.class);
-                    RepliesList.add(repliesContents);
+                    Log.d("amongus", amongus + " key");
                     list.add(postsContents);
 
+                    RepliesDatabase = mDatabase.child("/" + amongus + "/replies");
+
+//                    RepliesDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title + "/" + amongus + "/replies");
+                    RepliesDatabase.addValueEventListener(new ValueEventListener() {
+                        @SuppressLint("NotifyDataSetChanged")
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String KeyUser = amongus;
+                                Log.d("amongus", KeyUser);
+                                Log.d("amongus", dataSnapshot.toString());
+                                RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
+                                RepliesList.add(repliesContents);
+                            }
+                            postsAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+//                    DataSnapshot threadSnapshot = dataSnapshot.child(amongus).child("replies");
+//                    String amonguss = String.valueOf(threadSnapshot.getChildrenCount());
+//                    RepliesContents repliesContents = threadSnapshot.getValue(RepliesContents.class);
+//                    RepliesList.add(repliesContents);
+//                    list.add(postsContents);
                 }
 
 
@@ -170,6 +201,35 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
             }
         });
+
+        for (String Key : KeyList) {
+            RepliesDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title + "/" + Key + "/replies");
+            RepliesDatabase.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Log.d("amongus", dataSnapshot.toString());
+                        RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
+                        assert repliesContents != null;
+                        Log.d("amongus", repliesContents.toString());
+                        RepliesList.add(repliesContents);
+                    }
+                    postsAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
+
+
+
+
 
         AppBarPosts.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

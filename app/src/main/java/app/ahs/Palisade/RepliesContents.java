@@ -2,7 +2,7 @@ package app.ahs.Palisade;
 
 public class RepliesContents {
     private String reply;
-    private String UserUUID;
+    private String user;
 
     public String getReply() {
         return reply;
@@ -12,11 +12,11 @@ public class RepliesContents {
         this.reply = reply;
     }
 
-    public String getUserUUID() {
-        return UserUUID;
+    public String getUser() {
+        return user;
     }
 
-    public void setUserUUID(String userUUID) {
-        UserUUID = userUUID;
+    public void setUser(String user) {
+        this.user = user;
     }
 }
