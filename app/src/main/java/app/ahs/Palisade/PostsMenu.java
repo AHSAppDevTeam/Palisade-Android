@@ -60,6 +60,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     String UserUUID;
     SharedPreferences sp;
     String titles;
+    String title;
 
     MainActivity mainActivity = new MainActivity();
 
@@ -125,7 +126,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
 
-        String title = intent.getStringExtra(topicNameID);
+        title = intent.getStringExtra(topicNameID);
         AppBarPosts.setTitle(title);
         title = title.toLowerCase(Locale.ROOT);
         Log.d("amongus", title);
@@ -156,8 +157,10 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
                     String amongus = dataSnapshot.getKey();
-                    Log.d("amongus", amongus + " key");
+                    assert postsContents != null;
+                    postsContents.setKey(amongus);
                     list.add(postsContents);
+                    Log.d("amongus", postsContents.getKey());
 
                     RepliesDatabase = mDatabase.child("/" + amongus + "/replies");
 
@@ -171,6 +174,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                                 Log.d("amongus", KeyUser);
                                 Log.d("amongus", dataSnapshot.toString());
                                 RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
+                                repliesContents.setKey(KeyUser);
                                 RepliesList.add(repliesContents);
                             }
                             postsAdapter.notifyDataSetChanged();
@@ -188,9 +192,6 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 //                    RepliesList.add(repliesContents);
 //                    list.add(postsContents);
                 }
-
-
-
 //                list.add(postsContents);
 
                 postsAdapter.notifyDataSetChanged();
@@ -201,32 +202,6 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
             }
         });
-
-        for (String Key : KeyList) {
-            RepliesDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title + "/" + Key + "/replies");
-            RepliesDatabase.addValueEventListener(new ValueEventListener() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Log.d("amongus", dataSnapshot.toString());
-                        RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
-                        assert repliesContents != null;
-                        Log.d("amongus", repliesContents.toString());
-                        RepliesList.add(repliesContents);
-                    }
-                    postsAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-
-
-
 
 
 
@@ -242,15 +217,15 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
 
-    public void openMessage() {
-        String messageID = mDatabase.push().getKey();
-        UserMessage userMessage = new UserMessage();
+    public void openMessage(int position) {
+        PostsContents value = list.get(position);
+        UserMessage userMessage = new UserMessage(value, title);
         userMessage.show(getSupportFragmentManager(), "example dialog");
     }
 
 
     public void newPost() {
-        UserPost userPost = new UserPost();
+        UserPost userPost = new UserPost(title);
         userPost.show(getSupportFragmentManager(), "example dialog");
     }
 
@@ -268,7 +243,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     @Override
     public void onItemClick(int position) {
         Log.d("amongus", String.valueOf(position));
-        openMessage();
+        openMessage(position);
 
     }
 }

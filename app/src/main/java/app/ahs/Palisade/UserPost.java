@@ -26,8 +26,12 @@ public class UserPost extends AppCompatDialogFragment {
 
     SharedPreferences sp;
     SharedPreferences amongus;
-    String titles;
     String UserUUID;
+    String title;
+
+    public UserPost(String title) {
+        this.title = title;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,8 +39,6 @@ public class UserPost extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         sp = getActivity().getSharedPreferences("UUID", Context.MODE_PRIVATE);
-        amongus = getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
-        titles = sp.getString("title", "");
         UserUUID = sp.getString("UUID", "");
         long messageTime = new Date().getTime();
 
@@ -57,11 +59,10 @@ public class UserPost extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String post = editPost.getText().toString();
-//                        PostsContents postsContents = new PostsContents(null, post, UserUUID);
+//                        PostsContents postsContents = new PostsContents(post, UserUUID);
 //                        Log.d("amongus", postsContents.toString());
-                        //will send to database and then refresh using the refresh code wtih firebase
-//                        mDatabase.child("palisade").child(title).setValue();\
-//                        mDatabase.child("palisade").child(titles).child(String.valueOf(messageTime)).setValue(postsContents);
+////                        will send to database and then refresh using the refresh code wtih firebase
+//                        mDatabase.child("palisade").child(title).child(String.valueOf(messageTime)).setValue(postsContents);
 //                        listener.applyTexts(post);
 
                     }

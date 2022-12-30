@@ -1,10 +1,12 @@
 package app.ahs.Palisade;
 
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.MoreObjects;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,23 +29,28 @@ import java.util.Date;
 public class UserMessage extends AppCompatDialogFragment {
     private EditText editTextMessage;
     private UserMessageListener listener;
-    PostsMenu postsMenu =  new PostsMenu();
     private DatabaseReference mDatabase;
+    PostsMenu postsMenu;
     SharedPreferences sp;
     SharedPreferences amongus;
     String titles;
     String UserUUID;
+    int position;
+    String title;
+    PostsContents postsContents;
+    Context contexts;
 
 
-
+    public UserMessage(PostsContents postsContents, String title ) {
+        this.postsContents = postsContents;
+        this.title = title;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         sp = getActivity().getSharedPreferences("UUID", Context.MODE_PRIVATE);
-        amongus = getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
-        titles = sp.getString("title", "");
         UserUUID = sp.getString("UUID", "");
         long messageTime = new Date().getTime();
 
@@ -58,7 +66,7 @@ public class UserMessage extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.message_prompt, null);
 
         builder.setView(view)
-                .setTitle("Your Message")
+                .setTitle("Your Reply")
 
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -71,14 +79,26 @@ public class UserMessage extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String message = editTextMessage.getText().toString();
-                        Log.d("amongus", mDatabase.child("palisade").child(titles).get().toString());
+                        Log.d("amongus", message);
 
+                        Toast.makeText(, "Can't reply to your own message", Toast.LENGTH_SHORT).show();
 
-//                        PostsContents postsContents = new PostsContents(message, null, UserUUID);
+                        if (UserUUID.equals(postsContents.getUser())) {
+                            Toast.makeText(contexts, "Can't reply to your own message", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (message.equals("")){
+                                Toast.makeText(UserMessage.this.getContext(), "Can't reply with nothing", Toast.LENGTH_SHORT).show();
+
+                            } else {
+//                                RepliesContents repliesContents = new RepliesContents(message, UserUUID, String.valueOf(messageTime));
+//                                mDatabase.child(postsContents.getKey()).child("replies").setValue(repliesContents);
+                            }
+                        }
+
                         //add if statement to check if UserUUID is equal to the post id if it is then can't reply
                         //that means that we have to get the message time as well as the data to put a reply to the message.
-//                        mDatabase.child("palisade").child(titles).child(String.valueOf(messageTime)).setValue(postsContents);
-                        listener.applyTexts(message);
+//                        mDatabase.child("palisade").child(title).child(String.valueOf(messageTime)).setValue(repliesContents);
+//                        listener.applyTexts(message);
 
                     }
                 });
