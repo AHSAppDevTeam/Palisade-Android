@@ -148,6 +148,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
 //                PostsContents postsContents = new PostsContents();
 //
 //                postsContents.setMessage(snapshot.child("palisade").child(titles.toString()).;
