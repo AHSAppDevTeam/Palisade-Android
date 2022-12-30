@@ -149,20 +149,14 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     list.clear();
-//                PostsContents postsContents = new PostsContents();
-//
-//                postsContents.setMessage(snapshot.child("palisade").child(titles.toString()).;
+
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
                     String amongus = dataSnapshot.getKey();
                     assert postsContents != null;
                     postsContents.setKey(amongus);
-                    if (list.contains(postsContents)) {
-                        break;
-                    } else {
-                        list.add(postsContents);
-                    }
+                    list.add(postsContents);
                     Log.d("amongus", postsContents.getKey());
 
 
@@ -171,9 +165,11 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 //                    RepliesDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title + "/" + amongus + "/replies");
                     RepliesDatabase.addValueEventListener(new ValueEventListener() {
+
                         @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            RepliesList.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 String KeyUser = amongus;
                                 Log.d("amongus", KeyUser);

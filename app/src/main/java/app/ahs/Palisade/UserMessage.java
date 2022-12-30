@@ -58,6 +58,9 @@ public class UserMessage extends AppCompatDialogFragment {
         UserUUID = sp.getString("UUID", "");
         long messageTime = new Date().getTime();
 
+        Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+
+
 
         //pulls the message time as well as their id
 //        mDatabase.child("palisade").child(titles).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -87,17 +90,16 @@ public class UserMessage extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String message = editTextMessage.getText().toString();
                         Log.d("amongus", message);
-                        Log.d("amongus", String.valueOf(ActivityManager.isUserAMonkey()));
 
 
 //                        Toast.makeText(, "Can't reply to your own message", Toast.LENGTH_SHORT).show();
 
                         if (UserUUID.equals(postsContents.getUser())) {
-                            Toast.makeText(contexts, "Can't reply to your own message", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(contexts.getApplicationContext(), "Can't reply to your own message", Toast.LENGTH_SHORT).show();
                         } else {
                             if (message.isEmpty()){
                                 Log.d("amongus", "no");
-                                Toast.makeText(contexts, "Can't reply with nothing", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(contexts.getApplicationContext(), "Can't reply with nothing", Toast.LENGTH_SHORT).show();
                                 return;
                             } else {
                                 RepliesContents repliesContents = new RepliesContents(message, UserUUID, null);
