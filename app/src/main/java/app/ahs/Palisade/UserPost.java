@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -59,10 +60,15 @@ public class UserPost extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String post = editPost.getText().toString();
-//                        PostsContents postsContents = new PostsContents(post, UserUUID);
-//                        Log.d("amongus", postsContents.toString());
-////                        will send to database and then refresh using the refresh code wtih firebase
-//                        mDatabase.child("palisade").child(title).child(String.valueOf(messageTime)).setValue(postsContents);
+                        PostsContents postsContents = new PostsContents(post, UserUUID, null);
+                        Log.d("amongus", postsContents.toString());
+//                        will send to database and then refresh using the refresh code wtih firebase
+                        if (post.isEmpty()) {
+//                            Toast.makeText(, "", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mDatabase.child("palisade").child(title).child(String.valueOf(messageTime)).setValue(postsContents);
+                        }
+
 //                        listener.applyTexts(post);
 
                     }

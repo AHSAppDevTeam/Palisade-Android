@@ -88,10 +88,8 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         recyclerView = findViewById(R.id.recyclerview);
 
         sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
-        titles = sp.getString("title", "");
 //        UserUUID = String.valueOf(mainActivity.getUserUUID());
-//        SharedPreferences sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
-//        UserUUID = sp.getString("UUID", "");
+        UserUUID = sp.getString("UUID", "");
 
 
 
@@ -159,8 +157,14 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                     String amongus = dataSnapshot.getKey();
                     assert postsContents != null;
                     postsContents.setKey(amongus);
-                    list.add(postsContents);
+                    if (list.contains(postsContents)) {
+                        break;
+                    } else {
+                        list.add(postsContents);
+                    }
                     Log.d("amongus", postsContents.getKey());
+
+
 
                     RepliesDatabase = mDatabase.child("/" + amongus + "/replies");
 
@@ -186,13 +190,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
                         }
                     });
 
-//                    DataSnapshot threadSnapshot = dataSnapshot.child(amongus).child("replies");
-//                    String amonguss = String.valueOf(threadSnapshot.getChildrenCount());
-//                    RepliesContents repliesContents = threadSnapshot.getValue(RepliesContents.class);
-//                    RepliesList.add(repliesContents);
-//                    list.add(postsContents);
                 }
-//                list.add(postsContents);
 
                 postsAdapter.notifyDataSetChanged();
 
@@ -219,7 +217,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
     public void openMessage(int position) {
         PostsContents value = list.get(position);
-        UserMessage userMessage = new UserMessage(value, title);
+        UserMessage userMessage = new UserMessage(value, title, getApplicationContext());
         userMessage.show(getSupportFragmentManager(), "example dialog");
     }
 
