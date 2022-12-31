@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class ChattingMenu extends AppCompatActivity {
@@ -32,6 +35,7 @@ public class ChattingMenu extends AppCompatActivity {
     private TextView txtChattingWith;
     private ProgressBar progressBar;
     private ImageView imgSendMessage;
+    SharedPreferences sp;
 
     private ArrayList<Message> messages;
 
@@ -49,6 +53,13 @@ public class ChattingMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatting_menu);
 
+        sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
+        UserUUID = sp.getString("UUID", "");
+
+        // For the roommate uuid make sure that you can get the position and then get the info that reply so you can set up the chatting room
+
+
+
         MaterialToolbar topAppBarChat = findViewById(R.id.topAppBarChat);
 
 
@@ -64,7 +75,7 @@ public class ChattingMenu extends AppCompatActivity {
             }
         });
 
-//        UserUUID = getIntent().getStringExtra();
+
 
 
         recyclerView = findViewById(R.id.recyclerMessages);
@@ -85,7 +96,7 @@ public class ChattingMenu extends AppCompatActivity {
         imgSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase.getInstance().getReference("messages/"+chatRoomID).push().setValue(new Message(mainActivity.getUserUUID()));
+                FirebaseDatabase.getInstance().getReference("messagesforpalisade/"+chatRoomID).push().setValue(new Message(UserUUID));
                 edtMessageInput.setText("");
             }
         });
@@ -105,10 +116,8 @@ public class ChattingMenu extends AppCompatActivity {
 
     private void setUpChatRoom() {
         FirebaseDatabase.getInstance().getReference("palisade/messages").addListenerForSingleValueEvent(new ValueEventListener() {
-            MainActivity mainActivity = new MainActivity();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String UserUUID = String.valueOf(mainActivity.getUserUUID());
                 if (UserUUID.compareTo(RoommateUUID) > 0) {
                     chatRoomID = UserUUID + RoommateUUID;
                 } else if (RoommateUUID.compareTo(UserUUID) == 0) {
@@ -127,7 +136,7 @@ public class ChattingMenu extends AppCompatActivity {
     }
 
     private void attachMessageListener(String chatRoomID) {
-        FirebaseDatabase.getInstance().getReference("message/" + chatRoomID).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("messageforpalisade/" + chatRoomID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messages.clear();

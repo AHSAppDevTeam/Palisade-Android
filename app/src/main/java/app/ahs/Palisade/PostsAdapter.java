@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,50 +14,68 @@ import java.util.ArrayList;
 
 
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder>{
 
-
-    PostsData[] postsData;
     Context context;
+    OnItemClickListener listener;
+    ArrayList<PostsContents> list;
+
+    public PostsAdapter(ArrayList<PostsContents> list, Context context, OnItemClickListener listener) {
+        this.list = list;
+        this.context = context;
+        this.listener = listener;
+    }
+
 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflate layout
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.activity_posts_menu, parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        View view = layoutInflater.inflate(R.layout.materical_card_row, parent,false);
+//        ViewHolder viewHolder = new ViewHolder(view, listener);
+        return new MyViewHolder(view, listener);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final PostsData postsDataList = postsData[position];
-        holder.message.setText(postsDataList.getMessage());
-        holder.user.setText(postsDataList.getUser());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        //assigning new variables to the dynamic list
+        PostsContents postsContents = list.get(position);
+        holder.message.setText(postsContents.getMessage());
+//        holder.user.setText(postsContents.getUser());
+//        holder.messageID.setText(postsContents.getMessageID());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, postsDataList.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return postsData.length;
+        return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView message;
         TextView user;
+        TextView messageID;
+        Button reply;
 
-        public ViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             message = itemView.findViewById(R.id.question);
-            user = itemView.findViewById(R.id.username);
+            reply = itemView.findViewById(R.id.btn_reply);
+            reply.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onItemClick(this.getLayoutPosition());
+
         }
     }
 

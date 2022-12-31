@@ -7,7 +7,7 @@ public class Message {
     private String receiver;
     private String content;
 
-    Message(UUID userUUID){
+    Message(String userUUID){
 
     }
 

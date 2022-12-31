@@ -3,8 +3,11 @@ package app.ahs.Palisade;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,7 +20,8 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
     ActionBar textchange;
     Button natureButton;
     Intent intentPosts;
-    String uuid;
+    String UserUUID;
+
 
 
     @Override
@@ -29,9 +33,11 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
         intentPosts = new Intent(this, PostsMenu.class);
         textchange = getSupportActionBar();
 
-        Intent intent = getIntent();
-        uuid = intent.getStringExtra(TOPIC_NAME_ID);
+//        SharedPreferences sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
+//        UserUUID = sp.getString("UUID", "");
 
+
+        Intent intent = getIntent();
     }
 
     @Override
@@ -63,7 +69,7 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
                 break;
         }
         intentPosts.putExtra(PostsMenu.topicNameID, textchange.getTitle());
-        intentPosts.putExtra("UUID_OF_USER", uuid);
+//        Log.d("amongus", UserUUID);
         startActivity(intentPosts);
 
     }
