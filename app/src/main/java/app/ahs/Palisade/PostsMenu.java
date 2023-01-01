@@ -47,6 +47,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     private Button reply;
     private FloatingActionButton new_post;
     private TextView question;
+    private Button showReplies;
 
     public static final String topicNameID = "topicNameID";
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -64,7 +65,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
     MainActivity mainActivity = new MainActivity();
 
-    
+
     @Override
     public void applyTexts(String post) {
         question.setText(post);
@@ -88,6 +89,9 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_menu);
+
+
+
         Intent intent = getIntent();
         MaterialToolbar AppBarPosts = findViewById(R.id.topAppBarPosts);
         recyclerView = findViewById(R.id.recyclerview);
@@ -229,13 +233,13 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         userPost.show(getSupportFragmentManager(), "example dialog");
     }
 
-    @Override
-    public void applyTexts(String message) {
+//    @Override
+//    public void applyTexts(String message) {
 //        question.setText(message);
-        //upload to firebase instead of setting anything to text because that message will then popular the view or upload using the functions inside the classes for each post and message
-
-
-    }
+//        //upload to firebase instead of setting anything to text because that message will then popular the view or upload using the functions inside the classes for each post and message
+//
+//
+//    }
 //    public void Reply(View view) {
 //        openMessage();
 //    }

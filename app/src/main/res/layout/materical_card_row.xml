@@ -60,6 +60,15 @@
                     android:layout_marginEnd="8dp"
                     android:text="@string/reply" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_replies"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/show_replies"
+                    android:textColor="#4CBB17"/>
+
 <!--                <com.google.android.material.button.MaterialButton-->
 <!--                    android:id="@+id/btn_delete"-->
 <!--                    style="?attr/borderlessButtonStyle"-->

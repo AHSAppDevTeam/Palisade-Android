@@ -30,6 +30,7 @@
     <string name="reply">Reply</string>
     <string name="delete">Delete</string>
     <string name="question">Question</string>
+    <string name="show_replies">Show Replies</string>
 
 
 </resources>
