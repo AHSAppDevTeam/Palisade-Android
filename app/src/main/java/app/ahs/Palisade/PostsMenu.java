@@ -1,47 +1,33 @@
 package app.ahs.Palisade;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.google.firebase.database.Query;
-
 import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener, OnItemClickListener {
     private Button reply;
@@ -58,6 +44,8 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     ArrayList<PostsContents> list;
     ArrayList<RepliesContents> RepliesList;
     PostsAdapter postsAdapter;
+    RepliesAdapter repliesAdapter;
+    RecyclerView repliesRecyclerView;
     String UserUUID;
     SharedPreferences sp;
     String titles;
@@ -96,6 +84,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         MaterialToolbar AppBarPosts = findViewById(R.id.topAppBarPosts);
         recyclerView = findViewById(R.id.recyclerview);
 
+
         sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
 //        UserUUID = String.valueOf(mainActivity.getUserUUID());
         UserUUID = sp.getString("UUID", "");
@@ -124,6 +113,14 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             }
         });
 
+
+
+
+
+
+
+
+
         //Getting the title of the
 //        titles = getSharedPreferences("title", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = titles.edit();
@@ -140,12 +137,17 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
         list = new ArrayList<>();
-        RepliesList = new ArrayList<>();
         postsAdapter = new PostsAdapter(list, this, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(postsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        KeyList = new ArrayList<>();
+
+        RepliesList = new ArrayList<>();
+
+
+
+
+
 
 
 
@@ -159,14 +161,13 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     list.clear();
 
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PostsContents postsContents = dataSnapshot.getValue(PostsContents.class);
+                    RepliesPopUp repliesPopUp = new RepliesPopUp();
                     String amongus = dataSnapshot.getKey();
                     assert postsContents != null;
                     postsContents.setKey(amongus);
                     list.add(postsContents);
-                    Log.d("amongus", postsContents.getKey());
 
 
 
@@ -228,9 +229,20 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     }
 
 
+
     public void newPost() {
         UserPost userPost = new UserPost(title);
         userPost.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public void showReplies(int position){
+        PostsContents value = list.get(position);
+        RepliesDialog repliesDialog = new RepliesDialog(value);
+        repliesDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public String getTitles() {
+        return title;
     }
 
 //    @Override
@@ -244,10 +256,21 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 //        openMessage();
 //    }
 
+
+
     @Override
     public void onItemClick(int position) {
         Log.d("amongus", String.valueOf(position));
         openMessage(position);
-
     }
+
+    @Override
+    public void OnRepliesClicked(int position) {
+        showReplies(position);
+    }
+
+//    @Override
+//    public void onClick(View view) {
+//
+//    }
 }

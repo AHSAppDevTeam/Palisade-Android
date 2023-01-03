@@ -1,6 +1,7 @@
 package app.ahs.Palisade;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
     @Override
     public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.message_holder,parent,false);
+
+
+
         return new MessageHolder(view);
 
     }
@@ -70,6 +74,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return messages.size();
@@ -81,7 +87,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         ImageView profImage;
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
-
             ccll = itemView.findViewById(R.id.ccLayout);
             txtMessage = itemView.findViewById(R.id.txtMessage);
             profImage = itemView.findViewById(R.id.small_profile_img);

@@ -1,6 +1,7 @@
 package app.ahs.Palisade;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RepliesAdapter extends RecyclerView.Adapter<RepliesAdapter.MyViewHolder> {
-    private ArrayList<RepliesInfo> RepliesInfoList;
+    private ArrayList<RepliesContents> repliesList;
+    private Context context;
 
-    public RepliesAdapter(ArrayList<RepliesInfo> RepliesInfoList){
-        this.RepliesInfoList = RepliesInfoList;
+    public RepliesAdapter(ArrayList<RepliesContents> repliesList, Context context){
+        this.repliesList = repliesList;
+        this.context = context;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView replies;
-
-        public MyViewHolder(final View view){
-            super(view);
-            replies = view.findViewById(R.id.reply_reply);
-        }
-    }
 
     @NonNull
     @Override
@@ -36,12 +31,21 @@ public class RepliesAdapter extends RecyclerView.Adapter<RepliesAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RepliesAdapter.MyViewHolder holder, int position) {
-        String reply = RepliesInfoList.get(position).getReply_reply();
+        String reply = repliesList.get(position).getReply();
         holder.replies.setText(reply);
     }
 
     @Override
     public int getItemCount() {
-        return RepliesInfoList.size();
+        return repliesList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        private TextView replies;
+
+        public MyViewHolder(final View view){
+            super(view);
+            replies = view.findViewById(R.id.reply_reply);
+        }
     }
 }

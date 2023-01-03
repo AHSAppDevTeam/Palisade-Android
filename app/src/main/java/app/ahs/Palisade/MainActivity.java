@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String getUserUUID()
-    {
-        return uuidString;
+    public String getUserUUID() {
+        return sp.getString("UUID", "");
     }
+
 
 
 
