@@ -51,7 +51,7 @@ public class RepliesPopUp extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })
+        });
 
     }
 

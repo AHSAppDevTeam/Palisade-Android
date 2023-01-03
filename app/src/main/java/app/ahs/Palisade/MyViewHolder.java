@@ -16,16 +16,19 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
     public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
         super(itemView);
         btn_reply = itemView.findViewById(R.id.btn_reply);
-        btn_show_replies=itemView.findViewById(R.id.btn_replies);
+        btn_show_replies = itemView.findViewById(R.id.btn_replies);
         this.listener = listener;
-        btn_show_replies.setOnClickListener(this);
         btn_reply.setOnClickListener(this);
+        btn_show_replies.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-        listener.onItemClick(getAdapterPosition());
+        if (view == btn_reply) {
+            listener.onItemClick(getAdapterPosition(), "btn_reply");
+        } else if (view == btn_show_replies)
+            listener.onItemClick(getAdapterPosition(), "btn_show_replies");
 
     }
 }

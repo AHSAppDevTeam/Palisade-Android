@@ -116,7 +116,6 @@ public class UserMessage extends AppCompatDialogFragment {
                 });
         editTextMessage = view.findViewById(R.id.user_message);
 
-        AlertDialog dialog = builder.create();
 
         return builder.create();
     }

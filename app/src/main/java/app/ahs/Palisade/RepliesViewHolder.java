@@ -7,21 +7,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RepliesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private OnItemClickListener listener;
+    private final OnRepliesItemClickListener listener;
     private Button btn_show_replies;
 
 
-    public RepliesViewHolder(@NonNull View itemView) {
+    public RepliesViewHolder(@NonNull View itemView, OnRepliesItemClickListener listener) {
         super(itemView);
         btn_show_replies = itemView.findViewById(R.id.btn_replies);
-
-
+        this.listener = listener;
         btn_show_replies.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-
-
+        listener.OnRepliesClicked(getAdapterPosition());
     }
 }

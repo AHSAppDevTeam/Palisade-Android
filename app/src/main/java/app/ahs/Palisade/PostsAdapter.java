@@ -62,19 +62,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
         TextView message;
         TextView user;
         TextView messageID;
-        Button reply;
+        Button btn_reply;
+        Button btn_show_replies;
 
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             message = itemView.findViewById(R.id.question);
-            reply = itemView.findViewById(R.id.btn_reply);
-            reply.setOnClickListener(this);
+            btn_reply = itemView.findViewById(R.id.btn_reply);
+            btn_show_replies = itemView.findViewById(R.id.btn_replies);
+            btn_reply.setOnClickListener(this);
+            btn_show_replies.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            listener.onItemClick(this.getLayoutPosition());
+            if (view == btn_reply) {
+                listener.onItemClick(this.getLayoutPosition(), "btn_reply");
+            } else if (view == btn_show_replies) {
+                listener.onItemClick(this.getLayoutPosition(), "btn_show_replies");
+            }
 
         }
     }

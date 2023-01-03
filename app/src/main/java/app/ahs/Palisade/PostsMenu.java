@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener, OnItemClickListener {
+public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener, OnItemClickListener, OnRepliesItemClickListener {
     private Button reply;
     private FloatingActionButton new_post;
     private TextView question;
@@ -148,11 +148,6 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
 
-
-
-
-
-
         //Gets the Firebase Database
         mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title);
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -259,15 +254,23 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
     @Override
-    public void onItemClick(int position) {
-        Log.d("amongus", String.valueOf(position));
-        openMessage(position);
+    public void onItemClick(int position, String Button) {
+        if (Button.equals("btn_reply")) {
+            Log.d("amongus", String.valueOf(position));
+            openMessage(position);
+        } else if (Button.equals("btn_show_replies")) {
+            Log.d("amongus", String.valueOf(position));
+            showReplies(position);
+        }
     }
+
 
     @Override
     public void OnRepliesClicked(int position) {
+        Log.d("amongus", String.valueOf(position) + " show replies");
         showReplies(position);
     }
+
 
 //    @Override
 //    public void onClick(View view) {
