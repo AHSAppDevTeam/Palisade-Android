@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class RepliesCardView extends AppCompatActivity {
+public class RepliesCardView extends AppCompatActivity implements OnRepliesItemClickListener {
     private ArrayList<RepliesContents> RepliesList;
     private RecyclerView recyclerView;
     DatabaseReference repliesDatabase;
@@ -32,9 +32,16 @@ public class RepliesCardView extends AppCompatActivity {
         setContentView(R.layout.replies_menu);
         PostsMenu postsMenu = new PostsMenu();
         mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + postsMenu.getTitles());
+        Log.d("amongus", postsMenu.getTitles() + " hello");
         recyclerView = findViewById(R.id.reply_recycler_view);
         RepliesList = new ArrayList<>();
-        setAdapter();
+        RepliesAdapter adapter = new RepliesAdapter(RepliesList, this, this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+//        setAdapter();
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -46,12 +53,15 @@ public class RepliesCardView extends AppCompatActivity {
                     repliesDatabase.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String KeyUser = amongus;
-                            Log.d("amongus", KeyUser);
-                            Log.d("amongus", dataSnapshot.toString());
-                            RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
-                            repliesContents.setKey(KeyUser);
-                            RepliesList.add(repliesContents);
+                            RepliesList.clear();
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String KeyUser = amongus;
+                                Log.d("amongus", KeyUser);
+                                Log.d("amongus", dataSnapshot.toString());
+                                RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
+                                repliesContents.setKey(KeyUser);
+                                RepliesList.add(repliesContents);
+                            }
                         }
 
                         @Override
@@ -74,11 +84,17 @@ public class RepliesCardView extends AppCompatActivity {
     }
 
     private void setAdapter() {
-        RepliesAdapter adapter = new RepliesAdapter(RepliesList, this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RepliesAdapter adapter = new RepliesAdapter(RepliesList, this, this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onChatClicked(int position) {
+        //create new chat room which get the user to send for the messaging system
     }
 
 //    private void setReplyInfo() {

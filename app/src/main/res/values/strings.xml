@@ -31,6 +31,7 @@
     <string name="delete">Delete</string>
     <string name="question">Question</string>
     <string name="show_replies">Show Replies</string>
+    <string name="chat">Chat</string>
 
 
 </resources>

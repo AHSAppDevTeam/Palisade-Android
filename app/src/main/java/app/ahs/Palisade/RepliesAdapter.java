@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RepliesAdapter extends RecyclerView.Adapter<RepliesAdapter.MyViewHolder> {
-    private ArrayList<RepliesContents> repliesList;
-    private Context context;
 
-    public RepliesAdapter(ArrayList<RepliesContents> repliesList, Context context){
+    ArrayList<RepliesContents> repliesList;
+    Context context;
+    OnRepliesItemClickListener listener;
+
+    public RepliesAdapter(ArrayList<RepliesContents> repliesList, Context context, OnRepliesItemClickListener listener ){
         this.repliesList = repliesList;
         this.context = context;
+        this.listener = listener;
     }
 
 
@@ -40,12 +44,20 @@ public class RepliesAdapter extends RecyclerView.Adapter<RepliesAdapter.MyViewHo
         return repliesList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView replies;
+        Button btn_chat;
 
         public MyViewHolder(final View view){
             super(view);
             replies = view.findViewById(R.id.reply_reply);
+            btn_chat = view.findViewById(R.id.btn_chat);
+            btn_chat.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onChatClicked(this.getLayoutPosition());
         }
     }
 }

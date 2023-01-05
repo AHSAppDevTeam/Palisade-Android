@@ -266,7 +266,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
 
     @Override
-    public void OnRepliesClicked(int position) {
+    public void onChatClicked(int position) {
         Log.d("amongus", String.valueOf(position) + " show replies");
         showReplies(position);
     }

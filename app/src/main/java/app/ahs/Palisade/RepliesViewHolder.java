@@ -20,6 +20,6 @@ public class RepliesViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View view) {
-        listener.OnRepliesClicked(getAdapterPosition());
+        listener.onChatClicked(getAdapterPosition());
     }
 }
