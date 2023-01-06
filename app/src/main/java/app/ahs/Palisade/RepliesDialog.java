@@ -3,6 +3,7 @@ package app.ahs.Palisade;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Layout;
@@ -76,8 +77,8 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
         recyclerView =  view.findViewById(R.id.reply_recycler_view);
 
         repliesList = new ArrayList<>();
-        RepliesAdapter adapter = new RepliesAdapter(repliesList, getContext(), this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RepliesAdapter adapter = new RepliesAdapter(repliesList, getActivity(), this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -96,8 +97,6 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             repliesList.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                Log.d("amongus", amongus);
-                                Log.d("amongus", dataSnapshot.toString());
                                 RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
                                 repliesContents.setKey(amongus);
                                 repliesList.add(repliesContents);
@@ -133,6 +132,9 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
 
     @Override
     public void onChatClicked(int position) {
-
+        RepliesContents repliesContents = repliesList.get(position);
+        ChattingMenu chattingMenu = new ChattingMenu(repliesContents.getUser());
+        Intent intent = new Intent(chattingMenu, ChattingMenu.class);
+        startActivity(intent);
     }
 }

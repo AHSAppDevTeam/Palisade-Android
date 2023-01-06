@@ -46,7 +46,9 @@ public class ChattingMenu extends AppCompatActivity {
     String RoommateUUID;
 
 
-
+    public ChattingMenu(String roommateUUID) {
+        RoommateUUID = roommateUUID;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
