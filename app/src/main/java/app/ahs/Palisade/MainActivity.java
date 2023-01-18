@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent intent = new Intent(this, SelectionScene.class);
+            Intent intent = new Intent(this, RecyclerViewTest.class);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("UUID", uuidString);
             editor.apply();

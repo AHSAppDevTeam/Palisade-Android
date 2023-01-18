@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesItemClickListener {
     private TextView replyUser;
@@ -40,10 +41,12 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
     ArrayList<RepliesContents> repliesList;
     DatabaseReference mDatabase;
     DatabaseReference repliesDatabase;
+    String title;
 
 
-    public RepliesDialog(PostsContents position) {
+    public RepliesDialog(PostsContents position, String title) {
         this.postsContents = position;
+        this.title = title;
     }
 
     @Override
@@ -78,20 +81,23 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
 
         repliesList = new ArrayList<>();
         RepliesAdapter adapter = new RepliesAdapter(repliesList, getActivity(), this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        Log.d("amongus", title + " hello");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + postsMenu.getTitles());
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("palisade/" + title);
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String amongus = dataSnapshot.getKey();
-                    repliesDatabase = FirebaseDatabase.getInstance().getReference("palisade/"+ postsMenu.getTitles() + amongus + "/replies");
+                    repliesDatabase = FirebaseDatabase.getInstance().getReference("/" + amongus + "/replies");
                     repliesDatabase.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,6 +105,7 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 RepliesContents repliesContents = dataSnapshot.getValue(RepliesContents.class);
                                 repliesContents.setKey(amongus);
+                                Log.d("amongus", amongus);
                                 repliesList.add(repliesContents);
                             }
                         }
@@ -134,6 +141,7 @@ public class RepliesDialog extends AppCompatDialogFragment implements OnRepliesI
     public void onChatClicked(int position) {
         RepliesContents repliesContents = repliesList.get(position);
         ChattingMenu chattingMenu = new ChattingMenu(repliesContents.getUser());
+        Log.d("amongus", String.valueOf(position));
         Intent intent = new Intent(chattingMenu, ChattingMenu.class);
         startActivity(intent);
     }

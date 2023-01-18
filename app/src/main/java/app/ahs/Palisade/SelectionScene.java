@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
     Button natureButton;
     Intent intentPosts;
     String UserUUID;
+    Intent amongus;
 
 
 
@@ -33,11 +35,14 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
         intentPosts = new Intent(this, PostsMenu.class);
         textchange = getSupportActionBar();
 
+
+
 //        SharedPreferences sp = getApplicationContext().getSharedPreferences("UUID", Context.MODE_PRIVATE);
 //        UserUUID = sp.getString("UUID", "");
 
 
         Intent intent = getIntent();
+        amongus = new Intent(this, PostsViewModel.class);
     }
 
     @Override
@@ -70,6 +75,7 @@ public class SelectionScene extends AppCompatActivity implements View.OnClickLis
         }
         intentPosts.putExtra(PostsMenu.topicNameID, textchange.getTitle());
 //        Log.d("amongus", UserUUID);
+        amongus.putExtra(PostsMenu.topicNameID.toLowerCase(Locale.ROOT), textchange.getTitle());
         startActivity(intentPosts);
 
     }

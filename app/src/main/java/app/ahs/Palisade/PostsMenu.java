@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class PostsMenu extends AppCompatActivity implements UserMessage.UserMessageListener, UserPost.NewPostsListener, OnItemClickListener, OnRepliesItemClickListener {
@@ -34,6 +37,8 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     private FloatingActionButton new_post;
     private TextView question;
     private Button showReplies;
+
+    private PostsViewModel postsViewModel;
 
     public static final String topicNameID = "topicNameID";
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -77,6 +82,7 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_menu);
+
 
 
 
@@ -143,6 +149,15 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         RepliesList = new ArrayList<>();
+
+
+        PostsViewModel model = new ViewModelProvider(this).get(PostsViewModel.class);
+        model.getPostsContents().observe(this, new Observer<List<PostsContents>>() {
+            @Override
+            public void onChanged(List<PostsContents> postsContents) {
+
+            }
+        });
 
 
 
@@ -232,13 +247,10 @@ public class PostsMenu extends AppCompatActivity implements UserMessage.UserMess
 
     public void showReplies(int position){
         PostsContents value = list.get(position);
-        RepliesDialog repliesDialog = new RepliesDialog(value);
+        RepliesDialog repliesDialog = new RepliesDialog(value, title);
         repliesDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
-    public String getTitles() {
-        return title;
-    }
 
 //    @Override
 //    public void applyTexts(String message) {
